@@ -9,6 +9,7 @@
     "test:headless": "wdio run wdio.conf.js --headless",
     "test:create-and-delete-user": "wdio run wdio.conf.js --spec test/specs/createAndDeleteUser.spec.js",
     "test:search-product": "wdio run wdio.conf.js --spec test/specs/searchProduct.spec.js",
+    "test:cart-quantity": "wdio run wdio.conf.js --spec test/specs/quantityInCart.spec.js",
     "report": "start reports/html/report.html",
     "report:open": "start reports/html/report.html"
   },

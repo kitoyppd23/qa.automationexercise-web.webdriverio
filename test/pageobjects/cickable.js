@@ -20,6 +20,12 @@ class Clickable extends Page {
     get searchedProductsTitle() { return $('h2.title.text-center'); }
     get searchedProducts() { return $$('.features_items .col-sm-4 .product-image-wrapper'); }
     get addToCartButtons() { return $$('.btn.btn-default.add-to-cart'); }
+    get viewProductLinks() { return $$('a[href*="/product_details/"]'); }
+    get quantityInput() { return $('#quantity'); }
+    get addToCartButton() { return $('button.btn.btn-default.cart'); }
+    get viewCartLink() { return $('a[href="/view_cart"]'); }
+    get cartModal() { return $('#cartModal'); }
+    get cartQuantityButton() { return $('button.disabled'); }
 }
 
 const clickable = new Clickable();

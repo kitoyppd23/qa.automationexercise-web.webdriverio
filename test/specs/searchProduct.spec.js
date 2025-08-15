@@ -18,6 +18,10 @@ describe('Search Product', () => {
         // 4. Verificar se 'SEARCHED PRODUCTS' é visível
         const isTitleVisible = await simpleActions.verifySearchedProductsTitle();
         expect(isTitleVisible).to.be.true;
+
+        // 5. Verificar se todos os produtos relacionados à busca são visíveis
+        const isProductsVisible = await simpleActions.verifySearchedProducts();
+        expect(isProductsVisible).to.be.true;
         
 
     });
