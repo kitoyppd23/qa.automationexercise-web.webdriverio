@@ -33,16 +33,16 @@ package.json → Dependências e scripts do projeto.
  📌 Funcionalidades Testadas
 
  ✅ Implementado
-- **Test Case 1: Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
-- **Test Case 9: Busca de Produtos** → Busca por produtos, verificação do título "SEARCHED PRODUCTS" e validação dos resultados.
+    Test Case 1: Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
+    Test Case 9: Busca de Produtos** → Busca por produtos, verificação do título "SEARCHED PRODUCTS" e validação dos resultados.
 
-### 📝 Em Desenvolvimento
-- **Test Case 13: Verificar Quantidade no Carrinho** → Estrutura básica criada, aguardando implementação.
-- **Test Case 12: Adicionar Produtos ao Carrinho** → Estrutura básica criada, aguardando implementação.
-- **Test Case 17: Remover Produtos do Carrinho** → Estrutura básica criada, aguardando implementação.
+    📝 Em Desenvolvimento
+    Test Case 13: Verificar Quantidade no Carrinho** → Estrutura básica criada, aguardando implementação.
+    Test Case 12: Adicionar Produtos ao Carrinho** → Estrutura básica criada, aguardando implementação.
+    Test Case 17: Remover Produtos do Carrinho** → Estrutura básica criada, aguardando implementação.
 
  ✅ Implementado
-Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
+    Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
 
 
 ⚙️ Instalação
@@ -53,20 +53,20 @@ npm install
 
 ---
 
-## 🚀 Execução dos Testes
+    🚀 Execução dos Testes
 
-### Executar todos os testes
-```bash
+     Executar todos os testes
+    bash
 npm test
 ```
 
-### Executar teste específico
+     Executar teste específico
 ```bash
 npm run test:create-and-delete-user
 npm run test:search-product
 ```
 
-### Executar em modo headless
+     Executar em modo headless
 ```bash
 npm run test:headless
 ```
@@ -90,7 +90,7 @@ npm run report
 
 ---
 
-## 🏗️ Padrões de Desenvolvimento
+     🏗️ Padrões de Desenvolvimento
 
 - **Page Object Model (POM)**: Separação de elementos da página em objetos reutilizáveis
 - **Dados Dinâmicos**: Geração automática de dados para testes
