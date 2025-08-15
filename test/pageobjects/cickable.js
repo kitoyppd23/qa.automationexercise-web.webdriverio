@@ -30,6 +30,9 @@ class Clickable extends Page {
     get productCards() { return $$('.features_items .col-sm-4'); }
     get cartItems() { return $$('#cart_info_table tbody tr'); }
     get cartTotalPrice() { return $('.cart_total_price'); }
+    get cartButton() { return $('a[href="/view_cart"]'); }
+    get removeProductButtons() { return $$('a.cart_quantity_delete'); }
+    get emptyCartMessage() { return $('.empty_cart_message'); }
 }
 
 const clickable = new Clickable();

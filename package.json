@@ -11,6 +11,7 @@
     "test:search-product": "wdio run wdio.conf.js --spec test/specs/searchProduct.spec.js",
     "test:cart-quantity": "wdio run wdio.conf.js --spec test/specs/quantityInCart.spec.js",
     "test:add-products": "wdio run wdio.conf.js --spec test/specs/addProducts.spec.js",
+    "test:remove-products": "wdio run wdio.conf.js --spec test/specs/removeProducts.spec.js",
     "report": "start reports/html/report.html",
     "report:open": "start reports/html/report.html"
   },

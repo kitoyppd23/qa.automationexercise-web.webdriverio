@@ -100,9 +100,28 @@ class SimpleActions extends Page {
      */
     async clickViewProduct() {
         try {
+            // Garante que estamos na página inicial
+            const currentUrl = await browser.getUrl();
+            if (!currentUrl.includes('automationexercise.com') || currentUrl.includes('/products') || currentUrl.includes('/view_cart')) {
+                console.log('Navegando para a página inicial...');
+                await browser.url('http://automationexercise.com');
+                await browser.pause(2000);
+            }
+            
             const viewProductLinks = await clickable.viewProductLinks;
             if (viewProductLinks.length > 0) {
-                await this.clickButton(viewProductLinks[0]);
+                // Rola para o elemento ficar visível
+                await viewProductLinks[0].scrollIntoView();
+                await browser.pause(500);
+                
+                // Verifica se o elemento está visível
+                await this.waitForDisplayed(viewProductLinks[0], 5000);
+                
+                // Clica usando JavaScript para evitar interceptação por iframes
+                await browser.execute((element) => {
+                    element.click();
+                }, await viewProductLinks[0]);
+                
                 console.log('✅ Clicou em "View Product" do primeiro produto');
             } else {
                 throw new Error('Nenhum link "View Product" encontrado');
@@ -325,6 +344,116 @@ class SimpleActions extends Page {
             return false;
         }
     }
+
+    /**
+     * Clica no botão "Cart" na navegação
+     */
+    async clickCartButton() {
+        try {
+            await this.clickButton(clickable.cartButton);
+            console.log('✅ Clicou no botão "Cart"');
+            
+            // Aguarda a página do carrinho carregar
+            await browser.pause(2000);
+            
+        } catch (error) {
+            console.log('Erro ao clicar no botão Cart:', error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Remove um produto específico do carrinho
+     * @param {number} productIndex - Índice do produto a ser removido (0 para primeiro, 1 para segundo, etc.)
+     */
+    async removeProductFromCart(productIndex) {
+        try {
+            const removeButtons = await clickable.removeProductButtons;
+            
+            if (removeButtons.length <= productIndex) {
+                throw new Error(`Botão de remoção do produto ${productIndex + 1} não encontrado`);
+            }
+            
+            // Clica no botão "X" do produto específico
+            await this.clickButton(removeButtons[productIndex]);
+            console.log(`✅ Clicou no botão "X" para remover o produto ${productIndex + 1}`);
+            
+            // Aguarda a remoção ser processada
+            await browser.pause(2000);
+            
+        } catch (error) {
+            console.log(`Erro ao remover produto ${productIndex + 1} do carrinho:`, error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Verifica se o produto foi removido do carrinho
+     * @returns {Promise<boolean>} true se o produto foi removido
+     */
+    async verifyProductRemoved() {
+        try {
+            // Aguarda um pouco para a página atualizar
+            await browser.pause(2000);
+            
+            // Busca todos os itens no carrinho
+            const cartItems = await clickable.cartItems;
+            console.log(`Itens encontrados no carrinho após remoção: ${cartItems.length}`);
+            
+            // Se não há itens no carrinho, o produto foi removido com sucesso
+            if (cartItems.length === 0) {
+                console.log('✅ Carrinho está vazio - produto removido com sucesso');
+                return true;
+            }
+            
+            // Se ainda há itens, verifica se o produto específico foi removido
+            // (neste caso, verificamos se não há mais produtos no carrinho)
+            for (let i = 0; i < cartItems.length; i++) {
+                const itemText = await cartItems[i].getText();
+                console.log(`Produto ${i + 1} ainda no carrinho: ${itemText}`);
+            }
+            
+            // Se chegou até aqui, significa que ainda há produtos no carrinho
+            console.log('❌ Produto ainda está no carrinho');
+            return false;
+            
+        } catch (error) {
+            console.log('Erro ao verificar se produto foi removido:', error.message);
+            return false;
+        }
+    }
+
+    /**
+     * Limpa o carrinho removendo todos os produtos
+     */
+    async clearCart() {
+        try {
+            // Vai para a página do carrinho
+            await this.clickCartButton();
+            
+            // Busca todos os botões de remoção
+            const removeButtons = await clickable.removeProductButtons;
+            console.log(`Botões de remoção encontrados: ${removeButtons.length}`);
+            
+            // Remove todos os produtos do carrinho
+            for (let i = removeButtons.length - 1; i >= 0; i--) {
+                try {
+                    await this.clickButton(removeButtons[i]);
+                    console.log(`✅ Produto ${i + 1} removido do carrinho`);
+                    await browser.pause(1000);
+                } catch (error) {
+                    console.log(`Erro ao remover produto ${i + 1}:`, error.message);
+                }
+            }
+            
+            console.log('✅ Carrinho limpo com sucesso');
+            
+        } catch (error) {
+            console.log('Erro ao limpar carrinho:', error.message);
+        }
+    }
+
+
 }
 
 const simpleActions = new SimpleActions();
