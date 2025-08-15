@@ -16,9 +16,6 @@ Projeto de **testes automatizados** para o site [Automation Exercise](https://au
 
 ## 📂 Estrutura do Projeto
 
-
-
-
 ```
 test/specs → Arquivos de testes automatizados.
 
@@ -33,40 +30,40 @@ wdio.conf.js → Configuração do WebdriverIO.
 package.json → Dependências e scripts do projeto.
 
 
-
-
  📌 Funcionalidades Testadas
 
  ✅ Implementado
+- **Test Case 1: Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
+- **Test Case 9: Busca de Produtos** → Busca por produtos, verificação do título "SEARCHED PRODUCTS" e validação dos resultados.
+
+### 📝 Em Desenvolvimento
+- **Test Case 13: Verificar Quantidade no Carrinho** → Estrutura básica criada, aguardando implementação.
+- **Test Case 12: Adicionar Produtos ao Carrinho** → Estrutura básica criada, aguardando implementação.
+- **Test Case 17: Remover Produtos do Carrinho** → Estrutura básica criada, aguardando implementação.
+
+ ✅ Implementado
 Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
-
-📝 Em Desenvolvimento
-Busca de Produtos** → Estrutura criada, aguardando implementação.
-
 
 
 ⚙️ Instalação
 
 bash
 npm install
+```
 
+---
 
-✅ Implementado
-Registro e Exclusão de Usuário**: Teste completo do fluxo de cadastro de usuário no site, incluindo preenchimento de formulário e exclusão da conta criada.
+## 🚀 Execução dos Testes
 
- 📝 Em Desenvolvimento
-Busca de Produtos**: Estrutura básica criada, aguardando implementação completa.
-
-
-
- Executar todos os testes
-bash
+### Executar todos os testes
+```bash
 npm test
 ```
 
 ### Executar teste específico
 ```bash
 npm run test:create-and-delete-user
+npm run test:search-product
 ```
 
 ### Executar em modo headless
@@ -74,20 +71,26 @@ npm run test:create-and-delete-user
 npm run test:headless
 ```
 
-## Visualizar Relatórios
+---
+
+## 📊 Visualizar Relatórios
 
 ```bash
 npm run report
 ```
 
-## Configurações
+---
+
+## ⚙️ Configurações
 
 - **URL Base**: https://automationexercise.com
 - **Navegador**: Chrome
 - **Timeout**: 60 segundos por teste
 - **Relatórios**: HTML Nice Reporter
 
-## Padrões de Desenvolvimento
+---
+
+## 🏗️ Padrões de Desenvolvimento
 
 - **Page Object Model (POM)**: Separação de elementos da página em objetos reutilizáveis
 - **Dados Dinâmicos**: Geração automática de dados para testes
