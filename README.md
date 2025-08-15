@@ -41,8 +41,7 @@ package.json → Dependências e scripts do projeto.
     Test Case 12: Adicionar Produtos ao Carrinho** → Estrutura básica criada, aguardando implementação.
     Test Case 17: Remover Produtos do Carrinho** → Estrutura básica criada, aguardando implementação.
 
- ✅ Implementado
-    Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
+
 
 
 ⚙️ Instalação
@@ -55,13 +54,12 @@ npm install
 
     🚀 Execução dos Testes
 
-     Executar todos os testes
-    bash
-npm test
+
+    
+npm run:test
 ```
 
      Executar teste específico
-```bash
 npm run test:create-and-delete-user
 npm run test:search-product
 ```
