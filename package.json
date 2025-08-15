@@ -1,28 +1,41 @@
 {
   "name": "qa.automationexercise-web.webdriverio",
   "version": "1.0.0",
-  "description": "",
+  "description": "Test automation for Automation Exercise website using WebdriverIO",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wdio": "wdio run ./wdio.conf.js"
+    "test": "wdio run wdio.conf.js",
+    "test:headless": "wdio run wdio.conf.js --headless",
+    "test:register": "wdio run wdio.conf.js --spec ./test/specs/register.spec.js",
+    "test:search": "wdio run wdio.conf.js --spec ./test/specs/search.spec.js",
+    "test:cart-quantity": "wdio run wdio.conf.js --spec ./test/specs/cart-quantity.spec.js",
+    "test:add-to-cart": "wdio run wdio.conf.js --spec ./test/specs/add-to-cart.spec.js",
+    "test:remove-from-cart": "wdio run wdio.conf.js --spec ./test/specs/remove-from-cart.spec.js",
+    "test:create-and-delete-user": "wdio run wdio.conf.js --spec test/specs/createAndDeleteUser.spec.js",
+    "report": "start reports/html/report.html",
+    "report:open": "start reports/html/report.html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kitoyppd23/qa.automationexercise-web.webdriverio.git"
-  },
-  "keywords": [],
+  "keywords": [
+    "webdriverio",
+    "automation",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kitoyppd23/qa.automationexercise-web.webdriverio/issues"
-  },
-  "homepage": "https://github.com/kitoyppd23/qa.automationexercise-web.webdriverio#readme",
   "devDependencies": {
-    "@wdio/cli": "^9.19.1",
-    "@wdio/local-runner": "^9.19.1",
-    "@wdio/mocha-framework": "^9.19.1",
-    "@wdio/spec-reporter": "^9.19.1",
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
+    "@babel/register": "^7.22.15",
+    "@wdio/allure-reporter": "^8.24.2",
+    "@wdio/cli": "^8.24.3",
+    "@wdio/local-runner": "^8.24.3",
+    "@wdio/mocha-framework": "^8.24.3",
+    "@wdio/spec-reporter": "^8.24.2",
+    "allure-commandline": "^2.34.1",
+    "chai": "^4.3.10",
+    "chromedriver": "^139.0.1",
+    "wdio-chromedriver-service": "^8.1.1",
     "wdio-html-nice-reporter": "^8.1.7"
   }
 }

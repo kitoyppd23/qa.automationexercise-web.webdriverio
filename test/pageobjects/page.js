@@ -1,15 +1,61 @@
-const { browser } = require('@wdio/globals')
+export default class Page {
 
-/**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
-module.exports = class Page {
-    /**
-    * Opens a sub page of the page
-    * @param path path of the sub page (e.g. /path/to/page.html)
-    */
-    open (path) {
-        return browser.url(`https://the-internet.herokuapp.com/${path}`)
+    open(path) {
+        return browser.url(path);
     }
+
+    async waitForDisplayed(element, timeout = 10000) {
+        await element.waitForDisplayed({ timeout });
+    }
+
+    async getPageTitle() {
+        return await browser.getTitle();
+    }
+
+    async isElementVisible(element) {
+        try {
+            await this.waitForDisplayed(element);
+            return await element.isDisplayed();
+        } catch (error) {
+            return false;
+        }
+    }
+
+    async clickElement(element) {
+        await this.waitForDisplayed(element);
+        await element.click();
+    }
+
+    async setValue(element, value) {
+        await this.waitForDisplayed(element);
+        await element.setValue(value);
+    }
+
+    async getElementText(element) {
+        await this.waitForDisplayed(element);
+        return await element.getText();
+    }
+
+    async scrollToElement(element) {
+        await element.scrollIntoView();
+    }
+
+    async waitForPageLoad() {
+        await browser.waitUntil(
+            () => browser.execute(() => document.readyState === 'complete'),
+            {
+                timeout: 10000,
+                timeoutMsg: 'Page did not finish loading'
+            }
+        );
+    }
+
+    async selectByValue(element, value) {
+        await element.selectByAttribute('value', value);
+    }
+
+    async selectByVisibleText(element, text) {
+        await element.selectByVisibleText(text);
+    }
+
 }
