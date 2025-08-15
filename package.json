@@ -7,12 +7,8 @@
   "scripts": {
     "test": "wdio run wdio.conf.js",
     "test:headless": "wdio run wdio.conf.js --headless",
-    "test:register": "wdio run wdio.conf.js --spec ./test/specs/register.spec.js",
-    "test:search": "wdio run wdio.conf.js --spec ./test/specs/search.spec.js",
-    "test:cart-quantity": "wdio run wdio.conf.js --spec ./test/specs/cart-quantity.spec.js",
-    "test:add-to-cart": "wdio run wdio.conf.js --spec ./test/specs/add-to-cart.spec.js",
-    "test:remove-from-cart": "wdio run wdio.conf.js --spec ./test/specs/remove-from-cart.spec.js",
     "test:create-and-delete-user": "wdio run wdio.conf.js --spec test/specs/createAndDeleteUser.spec.js",
+    "test:search-product": "wdio run wdio.conf.js --spec test/specs/searchProduct.spec.js",
     "report": "start reports/html/report.html",
     "report:open": "start reports/html/report.html"
   },

@@ -17,7 +17,7 @@ Projeto de **testes automatizados** para o site [Automation Exercise](https://au
 ## 📂 Estrutura do Projeto
 
 
-## Estrutura do Projeto
+
 
 ```
 test/specs → Arquivos de testes automatizados.
@@ -33,34 +33,34 @@ wdio.conf.js → Configuração do WebdriverIO.
 package.json → Dependências e scripts do projeto.
 
 
----
 
-## 📌 Funcionalidades Testadas
 
-### ✅ Implementado
-- **Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
+ 📌 Funcionalidades Testadas
 
-### 📝 Em Desenvolvimento
-- **Busca de Produtos** → Estrutura criada, aguardando implementação.
+ ✅ Implementado
+Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
 
----
+📝 Em Desenvolvimento
+Busca de Produtos** → Estrutura criada, aguardando implementação.
 
-## ⚙️ Instalação
 
-```bash
+
+⚙️ Instalação
+
+bash
 npm install
 
 
-### ✅ Implementado
-- **Registro e Exclusão de Usuário**: Teste completo do fluxo de cadastro de usuário no site, incluindo preenchimento de formulário e exclusão da conta criada.
+✅ Implementado
+Registro e Exclusão de Usuário**: Teste completo do fluxo de cadastro de usuário no site, incluindo preenchimento de formulário e exclusão da conta criada.
 
-### 📝 Em Desenvolvimento
-- **Busca de Produtos**: Estrutura básica criada, aguardando implementação completa.
+ 📝 Em Desenvolvimento
+Busca de Produtos**: Estrutura básica criada, aguardando implementação completa.
 
 
 
-### Executar todos os testes
-```bash
+ Executar todos os testes
+bash
 npm test
 ```
 

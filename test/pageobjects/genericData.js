@@ -17,6 +17,10 @@ const genericData = {
     city: 'Lakeland',
     zipcode: '94101',
     mobileNumber: '11940088931',
-}
+};
+
+const productDataData = {
+    productName: 'jeans'
+};
 
 export default genericData;
