@@ -14,6 +14,12 @@ class Clickable extends Page {
     get createAccountButton() { return $('button[data-qa="create-account"]'); }
     get continueButton() { return $('a[data-qa="continue-button"]'); }
     get deleteAccountLink() { return $('a[href="/delete_account"]'); }
+    get productsButton() { return $('a[href="/products"]'); }
+    get searchButton() { return $('#submit_search'); }
+    get searchButtonAlt() { return $('button[type="submit"]'); }
+    get searchedProductsTitle() { return $('h2.title.text-center'); }
+    get searchedProducts() { return $$('.features_items .col-sm-4 .product-image-wrapper'); }
+    get addToCartButtons() { return $$('.btn.btn-default.add-to-cart'); }
 }
 
 const clickable = new Clickable();

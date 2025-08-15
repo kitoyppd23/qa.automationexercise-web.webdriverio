@@ -15,6 +15,7 @@ class InputForms extends Page {
     get city() { return $('#city'); }
     get zipcode() { return $('#zipcode'); }
     get mobileNumber() { return $('#mobile_number'); }
+    get searchProduct() { return $('#search_product'); }
 }
 
 const inputForms = new InputForms();
