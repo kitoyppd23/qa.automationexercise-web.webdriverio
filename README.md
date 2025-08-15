@@ -1,38 +1,55 @@
-# Automação de Testes - Automation Exercise
+# 🚀 Automação de Testes - Automation Exercise
 
-Projeto de testes automatizados para o site Automation Exercise utilizando WebdriverIO.
+Projeto de **testes automatizados** para o site [Automation Exercise](https://automationexercise.com) utilizando **WebdriverIO**.
 
-## Tecnologias Utilizadas
+---
 
-- **WebdriverIO** - Framework de automação
-- **JavaScript (ES6+)** - Linguagem de programação
-- **Mocha** - Framework de testes
-- **Chai** - Biblioteca de assertivas
-- **ChromeDriver** - Automação do navegador Chrome
+## 🛠 Tecnologias Utilizadas
+
+- **WebdriverIO** → Framework de automação
+- **JavaScript (ES6+)** → Linguagem de programação
+- **Mocha** → Framework de testes
+- **Chai** → Biblioteca de assertivas
+- **ChromeDriver** → Automação do navegador Chrome
+
+---
+
+## 📂 Estrutura do Projeto
+
 
 ## Estrutura do Projeto
 
 ```
-├── test/
-│   ├── specs/                    # Testes automatizados
-│   │   ├── createAndDeleteUser.spec.js
-│   │   └── searchProduct.spec.js
-│   ├── pageobjects/              # Objetos de página
-│   │   ├── baseUrl.js
-│   │   ├── cickable.js
-│   │   ├── inputForms.js
-│   │   ├── genericData.js
-│   │   ├── alertMessages.js
-│   │   └── page.js
-│   └── utils/                    # Utilitários
-│       ├── data-generator.js
-│       └── helpers.js
-├── reports/                      # Relatórios de teste
-├── wdio.conf.js                  # Configuração do WebdriverIO
-└── package.json
-```
+test/specs → Arquivos de testes automatizados.
 
-## Funcionalidades Testadas
+test/pageobjects → Objetos de página no padrão POM.
+
+test/utils → Funções auxiliares (geração de dados, helpers, etc.).
+
+reports → Relatórios de execução.
+
+wdio.conf.js → Configuração do WebdriverIO.
+
+package.json → Dependências e scripts do projeto.
+
+
+---
+
+## 📌 Funcionalidades Testadas
+
+### ✅ Implementado
+- **Registro e Exclusão de Usuário** → Fluxo completo de cadastro, preenchimento de formulário e exclusão da conta.
+
+### 📝 Em Desenvolvimento
+- **Busca de Produtos** → Estrutura criada, aguardando implementação.
+
+---
+
+## ⚙️ Instalação
+
+```bash
+npm install
+
 
 ### ✅ Implementado
 - **Registro e Exclusão de Usuário**: Teste completo do fluxo de cadastro de usuário no site, incluindo preenchimento de formulário e exclusão da conta criada.
@@ -40,13 +57,7 @@ Projeto de testes automatizados para o site Automation Exercise utilizando Webdr
 ### 📝 Em Desenvolvimento
 - **Busca de Produtos**: Estrutura básica criada, aguardando implementação completa.
 
-## Instalação
 
-```bash
-npm install
-```
-
-## Execução dos Testes
 
 ### Executar todos os testes
 ```bash
