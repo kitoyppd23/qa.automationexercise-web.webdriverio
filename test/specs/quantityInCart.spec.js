@@ -7,7 +7,10 @@ describe('Cart Quantity Verification', () => {
         // 1. Abrir o navegador e navegar para a URL 'http://automationexercise.com'
         const baseUrl = new BaseUrl();
         await baseUrl.open();
-
+        
+        // 1.5. Limpar o carrinho para garantir estado limpo
+        await simpleActions.clearCart();
+        
         // 2. Clicar em 'View Product' para qualquer produto na página inicial
         await simpleActions.clickViewProduct();
 
