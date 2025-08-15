@@ -202,6 +202,129 @@ class SimpleActions extends Page {
             return false;
         }
     }
+
+    /**
+     * Passa o mouse sobre um produto e clica em "Add to cart"
+     * @param {number} productIndex - Índice do produto (0 para primeiro, 1 para segundo, etc.)
+     */
+    async hoverAndAddToCart(productIndex) {
+        try {
+            const productCards = await clickable.productCards;
+            
+            if (productCards.length <= productIndex) {
+                throw new Error(`Produto ${productIndex + 1} não encontrado`);
+            }
+            
+            // Rola a página para garantir que o produto esteja visível
+            await productCards[productIndex].scrollIntoView();
+            await browser.pause(500);
+            
+            // Passa o mouse sobre o produto para mostrar o overlay
+            await productCards[productIndex].moveTo();
+            console.log(`✅ Mouse passou sobre o produto ${productIndex + 1}`);
+            
+            // Aguarda um pouco para o overlay aparecer
+            await browser.pause(1000);
+            
+            // Busca o botão "Add to cart" específico do produto que está sendo hoverado
+            // Usa o data-product-id para garantir que é o botão correto
+            const expectedProductId = productIndex + 1; // productIndex 0 = product-id 1, productIndex 1 = product-id 2
+            const specificAddToCartButton = $(`a[data-product-id="${expectedProductId}"].btn.btn-default.add-to-cart`);
+            
+            // Verifica se o botão está visível antes de tentar clicar
+            await this.waitForDisplayed(specificAddToCartButton, 5000);
+            
+            // Clica no botão "Add to cart" específico usando JavaScript para evitar interceptação
+            await browser.execute((element) => {
+                element.click();
+            }, await specificAddToCartButton);
+            console.log(`✅ Clicou em "Add to cart" do produto ${productIndex + 1} (ID: ${expectedProductId})`);
+            
+            // Aguarda a modal aparecer
+            await browser.pause(2000);
+            
+        } catch (error) {
+            console.log(`Erro ao adicionar produto ${productIndex + 1} ao carrinho:`, error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Clica no botão "Continue Shopping" na modal
+     */
+    async clickContinueShopping() {
+        try {
+            // Aguarda a modal aparecer completamente
+            await this.waitForDisplayed(clickable.cartModal, 10000);
+            console.log('✅ Modal do carrinho apareceu');
+            
+            // Aguarda um pouco mais para garantir que a modal está totalmente carregada
+            await browser.pause(1000);
+            
+            // Aguarda o botão "Continue Shopping" estar visível e clicável
+            await this.waitForDisplayed(clickable.continueShoppingButton, 5000);
+            
+            // Clica no botão "Continue Shopping"
+            await this.clickButton(clickable.continueShoppingButton);
+            
+            // Aguarda a modal fechar
+            await browser.pause(2000);
+            console.log('✅ Clicou em "Continue Shopping"');
+            
+        } catch (error) {
+            console.log('Erro ao clicar em Continue Shopping:', error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Verifica se ambos os produtos estão no carrinho com os preços corretos
+     * @returns {Promise<boolean>} true se os produtos estiverem corretos
+     */
+    async verifyCartProducts() {
+        try {
+            // Aguarda um pouco para a página carregar completamente
+            await browser.pause(2000);
+            
+            // Busca todos os itens no carrinho
+            const cartItems = await clickable.cartItems;
+            console.log(`Itens encontrados no carrinho: ${cartItems.length}`);
+            
+            if (cartItems.length !== 2) {
+                console.log(`❌ Esperado 2 produtos, encontrado: ${cartItems.length}`);
+                return false;
+            }
+            
+            // Verifica se os produtos estão corretos
+            let blueTopFound = false;
+            let menTshirtFound = false;
+            
+            for (let i = 0; i < cartItems.length; i++) {
+                const itemText = await cartItems[i].getText();
+                console.log(`Produto ${i + 1}: ${itemText}`);
+                
+                if (itemText.includes('Blue Top') && itemText.includes('Rs. 500')) {
+                    blueTopFound = true;
+                    console.log('✅ Blue Top (Rs. 500) encontrado');
+                } else if (itemText.includes('Men Tshirt') && itemText.includes('Rs. 400')) {
+                    menTshirtFound = true;
+                    console.log('✅ Men Tshirt (Rs. 400) encontrado');
+                }
+            }
+            
+            if (blueTopFound && menTshirtFound) {
+                console.log('✅ Ambos os produtos estão no carrinho com os preços corretos');
+                return true;
+            } else {
+                console.log('❌ Produtos ou preços incorretos no carrinho');
+                return false;
+            }
+            
+        } catch (error) {
+            console.log('Erro ao verificar produtos no carrinho:', error.message);
+            return false;
+        }
+    }
 }
 
 const simpleActions = new SimpleActions();

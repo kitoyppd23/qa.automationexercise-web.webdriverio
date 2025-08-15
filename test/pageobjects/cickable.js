@@ -26,6 +26,10 @@ class Clickable extends Page {
     get viewCartLink() { return $('a[href="/view_cart"]'); }
     get cartModal() { return $('#cartModal'); }
     get cartQuantityButton() { return $('button.disabled'); }
+    get continueShoppingButton() { return $('button.btn.btn-success.close-modal.btn-block'); }
+    get productCards() { return $$('.features_items .col-sm-4'); }
+    get cartItems() { return $$('#cart_info_table tbody tr'); }
+    get cartTotalPrice() { return $('.cart_total_price'); }
 }
 
 const clickable = new Clickable();
