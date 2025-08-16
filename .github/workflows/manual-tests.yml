@@ -41,26 +41,16 @@ jobs:
     - name: Run ${{ github.event.inputs.test_suite }} tests
       run: |
         if [ "${{ github.event.inputs.test_suite }}" = "all" ]; then
-          npm run test:ci
+          npm run test:ci-simple
         else
           npm run test:${{ github.event.inputs.test_suite }}
         fi
       env:
         CI: true
         
-    - name: Generate Allure Report
-      run: npm run allure:generate
-      
-    - name: Upload Allure Report as Artifact
+    - name: Upload HTML Report as Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: manual-test-allure-report-${{ github.event.inputs.test_suite }}
-        path: allure-report/
-        retention-days: 7
-        
-    - name: Upload Test Results as Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: manual-test-allure-results-${{ github.event.inputs.test_suite }}
-        path: allure-results/
+        name: manual-test-html-report-${{ github.event.inputs.test_suite }}
+        path: reports/html/
         retention-days: 7
