@@ -1,0 +1,13 @@
+{
+  "allure": {
+    "results": {
+      "directory": "allure-results"
+    },
+    "report": {
+      "directory": "allure-report"
+    },
+    "attachments": {
+      "directory": "allure-results/attachments"
+    }
+  }
+}
