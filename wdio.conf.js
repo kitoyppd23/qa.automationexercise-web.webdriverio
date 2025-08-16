@@ -63,26 +63,5 @@ export const config = {
         }
     },
 
-    // Gera relatório Allure após a execução dos testes
-    onComplete: function() {
-        // Importa o allure dinamicamente
-        const { exec } = require('child_process');
-        
-        return new Promise((resolve, reject) => {
-            console.log('Generating Allure report...');
-            
-            exec('npx allure generate allure-results --clean', (error, stdout, stderr) => {
-                if (error) {
-                    console.error('Error generating Allure report:', error);
-                    // Não rejeita a promise, apenas loga o erro
-                    resolve();
-                    return;
-                }
-                
-                console.log('Allure report generated successfully');
-                console.log(stdout);
-                resolve();
-            });
-        });
-    }
+    // Relatório Allure é gerado separadamente nos workflows do GitHub Actions
 };
