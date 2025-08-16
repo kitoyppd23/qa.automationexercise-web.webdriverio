@@ -1,0 +1,66 @@
+name: Manual Test Execution
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Test suite to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+        - all
+        - search-product
+        - add-products
+        - remove-products
+        - cart-quantity
+        - create-and-delete-user
+
+jobs:
+  manual-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+        
+    - name: Run ${{ github.event.inputs.test_suite }} tests
+      run: |
+        if [ "${{ github.event.inputs.test_suite }}" = "all" ]; then
+          npm run test:headless
+        else
+          npm run test:${{ github.event.inputs.test_suite }}
+        fi
+      env:
+        CI: true
+        
+    - name: Generate Allure Report
+      run: npm run allure:generate
+      
+    - name: Upload Allure Report as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: manual-test-allure-report-${{ github.event.inputs.test_suite }}
+        path: allure-report/
+        retention-days: 7
+        
+    - name: Upload Test Results as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: manual-test-allure-results-${{ github.event.inputs.test_suite }}
+        path: allure-results/
+        retention-days: 7
