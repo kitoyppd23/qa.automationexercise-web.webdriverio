@@ -65,23 +65,24 @@ export const config = {
 
     // Gera relatório Allure após a execução dos testes
     onComplete: function() {
-        const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'allure-results', '--clean'])
+        // Importa o allure dinamicamente
+        const { exec } = require('child_process');
+        
         return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
-
-            generation.on('exit', function(exitCode) {
-                clearTimeout(generationTimeout)
-
-                if (exitCode !== 0) {
-                    return reject(reportError)
+            console.log('Generating Allure report...');
+            
+            exec('npx allure generate allure-results --clean', (error, stdout, stderr) => {
+                if (error) {
+                    console.error('Error generating Allure report:', error);
+                    // Não rejeita a promise, apenas loga o erro
+                    resolve();
+                    return;
                 }
-
-                console.log('Allure report successfully generated')
-                resolve()
-            })
-        })
+                
+                console.log('Allure report generated successfully');
+                console.log(stdout);
+                resolve();
+            });
+        });
     }
 };

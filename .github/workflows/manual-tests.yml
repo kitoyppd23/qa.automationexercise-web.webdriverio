@@ -41,7 +41,7 @@ jobs:
     - name: Run ${{ github.event.inputs.test_suite }} tests
       run: |
         if [ "${{ github.event.inputs.test_suite }}" = "all" ]; then
-          npm run test:headless
+          npm run test:ci
         else
           npm run test:${{ github.event.inputs.test_suite }}
         fi
