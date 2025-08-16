@@ -53,10 +53,9 @@ npm install
 ---
 
     🚀 Execução dos Testes
-
-
     
-npm run:test
+     npm run:test
+
 ```
 
      Executar teste específico

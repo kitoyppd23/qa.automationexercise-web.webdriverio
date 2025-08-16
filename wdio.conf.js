@@ -42,6 +42,13 @@ export const config = {
             showInBrowser: false,                // não abrir automaticamente
             collapseTests: false,
             useOnAfterCommandForScreenshot: true // captura automática em falha de comando
+        }],
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
+            addConsoleLogs: true,
+            docstring: true
         }]
     ],
 
@@ -56,5 +63,25 @@ export const config = {
         }
     },
 
-    // 🔴 Allure removido: não há mais onComplete chamando "allure generate"
+    // Gera relatório Allure após a execução dos testes
+    onComplete: function() {
+        const reportError = new Error('Could not generate Allure report')
+        const generation = allure(['generate', 'allure-results', '--clean'])
+        return new Promise((resolve, reject) => {
+            const generationTimeout = setTimeout(
+                () => reject(reportError),
+                5000)
+
+            generation.on('exit', function(exitCode) {
+                clearTimeout(generationTimeout)
+
+                if (exitCode !== 0) {
+                    return reject(reportError)
+                }
+
+                console.log('Allure report successfully generated')
+                resolve()
+            })
+        })
+    }
 };
