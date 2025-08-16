@@ -241,8 +241,137 @@ npm run allure:serve
 
 **Localização:** `allure-report/`
 
-# Abrir relatório estático
-npm run allure:open
+### **Relatórios no GitHub Actions**
+
+Após cada execução do pipeline, os relatórios ficam disponíveis em:
+- **Actions** → **Workflow runs** → **Artifacts**
+
+#### **Visualizando Relatórios Baixados**
+
+Se você baixou um relatório do GitHub Actions e não consegue visualizá-lo corretamente (tela de "Loading..." ou erro), siga estes passos:
+
+1. **Navegue até a pasta do download**
+   ```bash
+   cd Downloads/manual-test-allure-report-all
+   ```
+
+2. **Inicie um servidor HTTP local**
+   ```bash
+   npx http-server -p 8080
+   ```
+
+3. **Confirme a instalação** (se solicitado)
+   ```bash
+   y
+   ```
+
+4. **Acesse no navegador**
+   ```
+   http://localhost:8080
+   ```
+
+**Por que isso é necessário?** Os relatórios Allure precisam ser servidos via HTTP devido às restrições de segurança do navegador que impedem JavaScript de carregar recursos locais.
+
+---
+
+## 🔧 Desenvolvimento
+
+### **Padrão Triple A (AAA)**
+
+Todos os testes seguem o padrão **Triple A** para garantir clareza e organização:
+
+#### **📋 Estrutura Triple A**
+
+```javascript
+describe('Nome do Teste', () => {
+    it('Descrição do caso de teste', async () => {
+        // ===== ARRANGE (Preparação) =====
+        // Configurar dados, variáveis e estado inicial
+        const baseUrl = new BaseUrl();
+        const testData = 'valor_teste';
+        
+        // ===== ACT (Execução) =====
+        // Executar as ações que estão sendo testadas
+        await baseUrl.open();
+        await simpleActions.performAction(testData);
+        
+        // ===== ASSERT (Validação) =====
+        // Verificar se o resultado é o esperado
+        const result = await simpleActions.getResult();
+        expect(result).to.be.true;
+    });
+});
+```
+
+#### **🎯 Benefícios do Triple A**
+
+- **✅ Clareza:** Cada seção tem um propósito específico
+- **✅ Manutenibilidade:** Fácil de entender e modificar
+- **✅ Debugging:** Identificação rápida de problemas
+- **✅ Padronização:** Estrutura consistente em todos os testes
+
+### **Adicionando Novos Testes**
+
+1. **Crie o arquivo de teste**
+   ```bash
+   touch test/specs/novoTeste.spec.js
+   ```
+
+2. **Implemente o teste seguindo Triple A**
+   ```javascript
+   import { expect } from 'chai';
+   import SimpleActions from '../pageobjects/simpleActions.js';
+
+   describe('Novo Teste', () => {
+       it('deve executar nova funcionalidade', async () => {
+           // ===== ARRANGE (Preparação) =====
+           const simpleActions = new SimpleActions();
+           
+           // ===== ACT (Execução) =====
+           const result = await simpleActions.performAction();
+           
+           // ===== ASSERT (Validação) =====
+           expect(result).to.be.true;
+       });
+   });
+   ```
+
+3. **Adicione o script no package.json**
+   ```json
+   {
+     "scripts": {
+       "test:novo-teste": "wdio run wdio.conf.js --spec test/specs/novoTeste.spec.js"
+     }
+   }
+   ```
+
+### **Page Object Model (POM)**
+
+```javascript
+// Exemplo de Page Object
+import Page from './page.js';
+
+class LoginPage extends Page {
+    get usernameInput() {
+        return $('#username');
+    }
+    
+    get passwordInput() {
+        return $('#password');
+    }
+    
+    get loginButton() {
+        return $('#login');
+    }
+    
+    async login(username, password) {
+        await this.usernameInput.setValue(username);
+        await this.passwordInput.setValue(password);
+        await this.loginButton.click();
+    }
+}
+
+export default new LoginPage();
 ```
 
 ---
@@ -290,6 +419,22 @@ it('teste com debug', async () => {
     await browser.pause(5000); // pausa de 5 segundos
 });
 ```
+
+### **P: Como visualizar relatórios baixados do GitHub Actions?**
+R: Se o relatório não carrega (tela de "Loading..."), use um servidor HTTP:
+```bash
+cd Downloads/manual-test-allure-report-all
+npx http-server -p 8080
+# Acesse: http://localhost:8080
+```
+
+### **P: O que é o padrão Triple A?**
+R: É uma estrutura de organização de testes com três seções:
+- **Arrange:** Preparação de dados e configurações
+- **Act:** Execução das ações sendo testadas
+- **Assert:** Validação dos resultados esperados
+
+Veja exemplos na seção [Desenvolvimento](#-desenvolvimento).
 
 📖 [Documentação Completa dos Pipelines](GITHUB_ACTIONS_README.md)
 

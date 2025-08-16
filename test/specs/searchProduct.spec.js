@@ -26,7 +26,7 @@ describe('Search Product', () => {
 
     });
 });
-
 //Inserir o nome do produto no campo de busca e clicar no botão de busca
 //Verificar se 'SEARCHED PRODUCTS' é visível
 //Verificar se todos os produtos relacionados à busca são visíveis
+
