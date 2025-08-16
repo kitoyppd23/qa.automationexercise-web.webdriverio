@@ -72,9 +72,41 @@ npm run test:headless
 
 ## 📊 Visualizar Relatórios
 
+### Relatório HTML
 ```bash
 npm run report
 ```
+
+### Relatório Allure (Recomendado)
+```bash
+# Servir relatório dinâmico
+npm run allure:serve
+
+# Abrir relatório estático
+npm run allure:open
+```
+
+## 🚀 GitHub Actions - CI/CD
+
+Este projeto possui pipelines automatizados configurados no GitHub Actions:
+
+### 📋 Workflows Disponíveis
+- **Test Automation Pipeline**: Execução automática em push/PR
+- **Manual Test Execution**: Execução sob demanda de suites específicas
+- **Test Notifications**: Notificações no Slack (opcional)
+
+### 📊 Relatórios Online
+Após push para a branch `main`, o relatório Allure fica disponível em:
+```
+https://[seu-usuario].github.io/[seu-repo]/allure-report/
+```
+
+### 🔧 Configuração
+1. **GitHub Pages**: Habilitar em Settings > Pages
+2. **Secrets**: Configurar `SLACK_WEBHOOK_URL` (opcional)
+3. **Branch Protection**: Recomendado para `main`
+
+📖 [Documentação Completa dos Pipelines](GITHUB_ACTIONS_README.md)
 
 ---
 
