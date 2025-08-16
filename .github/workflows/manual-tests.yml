@@ -64,3 +64,10 @@ jobs:
         name: manual-test-results-${{ github.event.inputs.test_suite }}
         path: allure-results/
         retention-days: 7
+        
+    - name: Upload HTML Report as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: manual-test-html-report-${{ github.event.inputs.test_suite }}
+        path: reports/html/
+        retention-days: 7
